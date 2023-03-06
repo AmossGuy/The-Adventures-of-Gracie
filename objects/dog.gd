@@ -10,11 +10,15 @@ const JUMP_COYOTE_TIME: float = 0.2
 const THROW_POWER: float = 100.0
 const INVULNERABILITY_TIME: float = 1.0
 const FLASH_INTERVAL: float = 0.1
+const KNOCKBACK_FORCE_H: float = 50.0
+const KNOCKBACK_FORCE_V: float = 100.0
+const OOF_BOUNCE: float = 100.0
 
 enum State {
 	GROUND,
 	JUMP,
 	FALL,
+	HURT,
 	OOFED,
 }
 
@@ -32,18 +36,25 @@ func _physics_process(delta: float) -> void:
 		$Sprite.visible = fmod(invulnerability_timer, interval * 2) >= interval
 		invulnerability_timer -= delta
 		invulnerability_timer = max(invulnerability_timer, 0)
-	else:
+	elif not state in [State.HURT, State.OOFED]:
 		$Sprite.visible = true
 		var ow_area: Area2D = get_node("%ow_area")
 		for enemy in get_tree().get_nodes_in_group("enemy"):
 			if ow_area.overlaps_body(enemy):
+				velocity.x = -$Sprite.scale.x * KNOCKBACK_FORCE_H
+				velocity.y = -KNOCKBACK_FORCE_V
 				$health.health -= 1
 				if $health.health <= 0:
-					$Sprite.scale.y = 0.5
-					velocity.x = 0
+					velocity.y *= 1.5
 					state = State.OOFED
+					var camera: Node = $Camera2D
+					var c_trans: Transform2D = camera.global_transform
+					remove_child(camera)
+					get_parent().add_child(camera)
+					camera.global_transform = c_trans
 				else:
 					invulnerability_timer = INVULNERABILITY_TIME
+					state = State.HURT
 				break
 	
 	if Input.is_action_just_pressed("grab"):
@@ -96,17 +107,25 @@ func _physics_process(delta: float) -> void:
 				velocity.y = -JUMP_FORCE
 				state = State.JUMP
 	
-	if state != State.OOFED:
+	if state in [State.GROUND, State.JUMP, State.FALL]:
 		var hor_input := -float(Input.is_action_pressed("left")) + float(Input.is_action_pressed("right"))
 		velocity.x = hor_input * WALK_SPEED
 	
 	velocity += delta * Vector2.DOWN * GRAVITY
 	
-	if velocity.x < 0:
-		$Sprite.scale.x = -1
-	elif velocity.x > 0:
-		$Sprite.scale.x = 1
+	if state in [State.GROUND, State.JUMP, State.FALL]:
+		if velocity.x < 0:
+			$Sprite.scale.x = -1
+		elif velocity.x > 0:
+			$Sprite.scale.x = 1
 	
 	var grounded: bool = state == State.GROUND
 	var snap := Vector2.DOWN * SNAP_DISTANCE if grounded else Vector2.ZERO
 	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true)
+	
+	if state == State.HURT and is_on_floor():
+		state = State.GROUND
+	if state == State.OOFED and is_on_floor():
+		velocity.y = -OOF_BOUNCE
+		collision_layer = 0
+		collision_mask = 0
