@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprites/gracie.webp" type="Texture" id=1]
 [ext_resource path="res://objects/dog.gd" type="Script" id=2]
 [ext_resource path="res://sprites/frisbee.webp" type="Texture" id=3]
 [ext_resource path="res://hud.tscn" type="PackedScene" id=4]
 [ext_resource path="res://health.gd" type="Script" id=5]
+[ext_resource path="res://dog_attacks.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 16 )
@@ -64,4 +65,8 @@ collision_mask = 2
 position = Vector2( 0, -7 )
 shape = SubResource( 3 )
 
-[connection signal="health_changed" from="health" to="hud" method="update"]
+[node name="attacks" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[connection signal="health_changed" from="health" to="hud" method="update_health"]
+[connection signal="attackstatus_changed" from="attacks" to="hud" method="update_attackstatus"]

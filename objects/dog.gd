@@ -57,22 +57,31 @@ func _physics_process(delta: float) -> void:
 					state = State.HURT
 				break
 	
-	if Input.is_action_just_pressed("grab"):
-		var grab_area: Area2D = get_node("%grab_area")
-		var frisbee_sprite: Node = get_node("%frisbee_sprite")
-		
-		if not frisbee_sprite.visible:
-			for frisbee in get_tree().get_nodes_in_group("frisbee"):
-				if grab_area.overlaps_body(frisbee):
-					frisbee.queue_free()
-					frisbee_sprite.visible = true
-					break
+	var grab_area: Area2D = get_node("%grab_area")
+	var frisbee_sprite: Node = get_node("%frisbee_sprite")
+	
+	for frisbee in get_tree().get_nodes_in_group("frisbee"):
+		if abs(frisbee.velocity.x) < 40 and grab_area.overlaps_body(frisbee):
+			frisbee.queue_free()
+			$attacks.f_ammo += 1
+			frisbee_sprite.visible = $attacks.selection == 1 and $attacks.f_ammo > 0
+	
+	if Input.is_action_just_pressed("switch"):
+		if $attacks.selection == 0:
+			$attacks.selection = 1
 		else:
-			frisbee_sprite.visible = false
-			var frisbee: Node = load("res://objects/frisbee.tscn").instance()
+			$attacks.selection = 0
+		frisbee_sprite.visible = $attacks.selection == 1 and $attacks.f_ammo > 0
+	
+	if Input.is_action_just_pressed("attack"):
+		if $attacks.selection == 1 and $attacks.f_ammo > 0:
+			$attacks.f_ammo -= 1
+			var frisbee: Node2D = load("res://objects/frisbee.tscn").instance()
 			frisbee.global_position = frisbee_sprite.global_position + Vector2(0, 2)
 			frisbee.velocity = Vector2(THROW_POWER * $Sprite.scale.x, -THROW_POWER)
 			get_parent().add_child(frisbee)
+		
+		frisbee_sprite.visible = $attacks.selection == 1 and $attacks.f_ammo > 0
 	
 	jump_buffer_timer -= delta
 	jump_buffer_timer = max(jump_buffer_timer, 0)
