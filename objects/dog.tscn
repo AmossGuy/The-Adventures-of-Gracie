@@ -7,14 +7,14 @@
 [ext_resource type="Script" path="res://health.gd" id="5"]
 [ext_resource type="Script" path="res://dog_attacks.gd" id="6"]
 
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(32, 32)
-
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(24, 14)
 
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(24, 14)
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(32, 22)
 
 [node name="dog" type="CharacterBody2D"]
 z_index = 2
@@ -36,15 +36,6 @@ show_behind_parent = true
 position = Vector2(13, -9)
 texture = ExtResource("3")
 
-[node name="grab_area" type="Area2D" parent="Sprite2D"]
-unique_name_in_owner = true
-position = Vector2(13, -9)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/grab_area"]
-shape = SubResource("2")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
 shape = SubResource("1")
@@ -65,6 +56,15 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ow_area"]
 position = Vector2(0, -7)
 shape = SubResource("3")
+
+[node name="grab_area" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grab_area"]
+position = Vector2(0, -7)
+shape = SubResource("2")
 
 [node name="attacks" type="Node" parent="."]
 script = ExtResource("6")
