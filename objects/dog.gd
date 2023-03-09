@@ -1,6 +1,5 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-const SNAP_DISTANCE: float = 4.0
 const GRAVITY: float = 400.0
 const WALK_SPEED: float = 80.0
 const JUMP_FORCE: float = 210.0
@@ -23,7 +22,6 @@ enum State {
 }
 
 var state: int = State.GROUND
-var velocity: Vector2 = Vector2.ZERO
 var jump_buffer_timer: float = 0.0
 var jump_coyote_timer: float = 0.0
 var invulnerability_timer: float = 0.0
@@ -33,15 +31,15 @@ func _physics_process(delta: float) -> void:
 		var interval := FLASH_INTERVAL
 		if invulnerability_timer <= INVULNERABILITY_TIME / 5:
 			interval /= 2
-		$Sprite.visible = fmod(invulnerability_timer, interval * 2) >= interval
+		$Sprite2D.visible = fmod(invulnerability_timer, interval * 2) >= interval
 		invulnerability_timer -= delta
 		invulnerability_timer = max(invulnerability_timer, 0)
 	elif not state in [State.HURT, State.OOFED]:
-		$Sprite.visible = true
+		$Sprite2D.visible = true
 		var ow_area: Area2D = get_node("%ow_area")
 		for enemy in get_tree().get_nodes_in_group("enemy"):
 			if ow_area.overlaps_body(enemy):
-				velocity.x = -$Sprite.scale.x * KNOCKBACK_FORCE_H
+				velocity.x = -$Sprite2D.scale.x * KNOCKBACK_FORCE_H
 				velocity.y = -KNOCKBACK_FORCE_V
 				$health.health -= 1
 				if $health.health <= 0:
@@ -76,9 +74,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		if $attacks.selection == 1 and $attacks.f_ammo > 0:
 			$attacks.f_ammo -= 1
-			var frisbee: Node2D = load("res://objects/frisbee.tscn").instance()
+			var frisbee: Node2D = load("res://objects/frisbee.tscn").instantiate()
 			frisbee.global_position = frisbee_sprite.global_position + Vector2(0, 2)
-			frisbee.velocity = Vector2(THROW_POWER * $Sprite.scale.x, -THROW_POWER)
+			frisbee.velocity = Vector2(THROW_POWER * $Sprite2D.scale.x, -THROW_POWER)
 			get_parent().add_child(frisbee)
 		
 		frisbee_sprite.visible = $attacks.selection == 1 and $attacks.f_ammo > 0
@@ -124,13 +122,11 @@ func _physics_process(delta: float) -> void:
 	
 	if state in [State.GROUND, State.JUMP, State.FALL]:
 		if velocity.x < 0:
-			$Sprite.scale.x = -1
+			$Sprite2D.scale.x = -1
 		elif velocity.x > 0:
-			$Sprite.scale.x = 1
+			$Sprite2D.scale.x = 1
 	
-	var grounded: bool = state == State.GROUND
-	var snap := Vector2.DOWN * SNAP_DISTANCE if grounded else Vector2.ZERO
-	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true)
+	move_and_slide()
 	
 	if state == State.HURT and is_on_floor():
 		state = State.GROUND

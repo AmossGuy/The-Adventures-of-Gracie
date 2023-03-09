@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://yc0ytkid1csy"]
+
+[ext_resource type="Texture2D" uid="uid://y1wig8erdg4i" path="res://tilesets/placeholder.png" id="1_gmsbg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_he5gn"]
+size = Vector2(16, 8)
+
+[node name="hack_platform_r" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_gmsbg")
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_he5gn")
+one_way_collision = true

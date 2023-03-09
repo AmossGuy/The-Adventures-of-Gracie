@@ -1,12 +1,11 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-export var patrol: bool = false
+@export var patrol: bool = false
 
 const GRAVITY: float = 400.0
 const WALK_SPEED: float = 40.0
 const EDGE_COOLDOWN: float = 0.1
 
-var velocity: Vector2 = Vector2.ZERO
 var direction: float = 1
 var edge_cooldown: float = 0
 
@@ -17,12 +16,11 @@ func _physics_process(delta: float) -> void:
 	velocity += delta * Vector2.DOWN * GRAVITY
 	
 	if velocity.x < 0:
-		$Sprite.scale.x = -1
+		$Sprite2D.scale.x = -1
 	elif velocity.x > 0:
-		$Sprite.scale.x = 1
+		$Sprite2D.scale.x = 1
 	
-	var snap := Vector2.ZERO
-	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true)
+	move_and_slide()
 	if edge_cooldown > 0:
 		edge_cooldown -= delta
 	else:

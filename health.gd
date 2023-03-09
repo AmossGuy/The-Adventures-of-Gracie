@@ -2,8 +2,8 @@ extends Node
 
 signal health_changed(health, max_health)
 
-export var max_health: float = 10
-onready var health: float = max_health setget health_set
+@export var max_health: float = 10
+@onready var health: float = max_health : set = health_set
 
 func _ready() -> void:
 	emit_signal("health_changed", health, max_health)

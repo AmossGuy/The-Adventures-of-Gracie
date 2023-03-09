@@ -2,8 +2,8 @@ extends Node
 
 signal attackstatus_changed(selection, f_ammo)
 
-var selection: int = 0 setget selection_set
-var f_ammo: int = 0 setget f_ammo_set
+var selection: int = 0 : set = selection_set
+var f_ammo: int = 0 : set = f_ammo_set
 
 func _ready() -> void:
 	emit_signal("attackstatus_changed", selection, f_ammo)

@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-onready var dots: Array = [$health_dot]
-onready var numnber_prace: Node2D = $frisbee_icon/Node2D
+@onready var dots: Array = [$health_dot]
+@onready var numnber_prace: Node2D = $frisbee_icon/Node2D
 
 func update_health(health: float, max_health: float) -> void:
 	if max_health != dots.size():
@@ -28,15 +28,15 @@ func update_attackstatus(selection: int, f_ammo: int) -> void:
 	if string.length() == 1:
 		string = "0" + string
 	
-	var offset := Vector2(ceil(16 - (5 * string.length())) / 2, 9)
+	var number_offset := Vector2(ceil(16 - (5 * string.length())) / 2, 9)
 	var x: int = 0
 	for c in string:
-		var sprite: Sprite = Sprite.new()
+		var sprite: Sprite2D = Sprite2D.new()
 		sprite.texture = preload("res://sprites/5px_numbers.png")
 		sprite.centered = false
 		sprite.hframes = 10
 		sprite.frame = int(c)
-		sprite.position = offset + Vector2(x * 5, 0)
+		sprite.position = number_offset + Vector2(x * 5, 0)
 		numnber_prace.add_child(sprite)
 		
 		x += 1
