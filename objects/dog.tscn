@@ -51,14 +51,15 @@ position = Vector2(0, -8)
 [node name="health" type="Node" parent="."]
 script = ExtResource("5")
 
-[node name="ow_area" type="Area2D" parent="."]
+[node name="hitbox" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 0
-collision_mask = 2
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ow_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(0, -7)
 shape = SubResource("3")
+debug_color = Color(0, 1, 0, 0.419608)
 
 [node name="grab_area" type="Area2D" parent="."]
 unique_name_in_owner = true

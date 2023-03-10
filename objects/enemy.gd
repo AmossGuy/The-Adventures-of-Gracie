@@ -28,6 +28,5 @@ func _physics_process(delta: float) -> void:
 			direction = -direction
 			edge_cooldown = EDGE_COOLDOWN
 
-func _on_hurtbox_area_entered(area: Area2D):
-	if area.is_in_group("hurts_enemies"):
-		queue_free()
+func _on_hitbox_area_entered(_area: Area2D):
+	queue_free()

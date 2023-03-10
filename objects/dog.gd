@@ -36,24 +36,21 @@ func _physics_process(delta: float) -> void:
 		invulnerability_timer = max(invulnerability_timer, 0)
 	elif not state in [State.HURT, State.OOFED]:
 		$Sprite2D.visible = true
-		var ow_area: Area2D = get_node("%ow_area")
-		for enemy in get_tree().get_nodes_in_group("enemy"):
-			if ow_area.overlaps_body(enemy):
-				velocity.x = -$Sprite2D.scale.x * KNOCKBACK_FORCE_H
-				velocity.y = -KNOCKBACK_FORCE_V
-				$health.health -= 1
-				if $health.health <= 0:
-					velocity.y *= 1.5
-					state = State.OOFED
-					var camera: Node = $Camera2D
-					var c_trans: Transform2D = camera.global_transform
-					remove_child(camera)
-					get_parent().add_child(camera)
-					camera.global_transform = c_trans
-				else:
-					invulnerability_timer = INVULNERABILITY_TIME
-					state = State.HURT
-				break
+		if %hitbox.has_overlapping_areas():
+			velocity.x = -$Sprite2D.scale.x * KNOCKBACK_FORCE_H
+			velocity.y = -KNOCKBACK_FORCE_V
+			$health.health -= 1
+			if $health.health <= 0:
+				velocity.y *= 1.5
+				state = State.OOFED
+				var camera: Node = $Camera2D
+				var c_trans: Transform2D = camera.global_transform
+				remove_child(camera)
+				get_parent().add_child(camera)
+				camera.global_transform = c_trans
+			else:
+				invulnerability_timer = INVULNERABILITY_TIME
+				state = State.HURT
 	
 	var grab_area: Area2D = get_node("%grab_area")
 	var frisbee_sprite: Node = get_node("%frisbee_sprite")
