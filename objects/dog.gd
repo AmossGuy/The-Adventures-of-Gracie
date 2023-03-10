@@ -78,6 +78,8 @@ func _physics_process(delta: float) -> void:
 			frisbee.global_position = frisbee_sprite.global_position + Vector2(0, 2)
 			frisbee.velocity = Vector2(THROW_POWER * $Sprite2D.scale.x, -THROW_POWER)
 			get_parent().add_child(frisbee)
+		elif $attacks.selection == 0:
+			%bite_hitbox.create_instance()
 		
 		frisbee_sprite.visible = $attacks.selection == 1 and $attacks.f_ammo > 0
 	

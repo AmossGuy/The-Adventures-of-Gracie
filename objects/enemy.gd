@@ -27,3 +27,7 @@ func _physics_process(delta: float) -> void:
 		if patrol and (is_on_wall() or (is_on_floor() and not $edge_raycast.is_colliding())):
 			direction = -direction
 			edge_cooldown = EDGE_COOLDOWN
+
+func _on_hurtbox_area_entered(area: Area2D):
+	if area.is_in_group("hurts_enemies"):
+		queue_free()

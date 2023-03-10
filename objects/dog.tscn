@@ -36,6 +36,9 @@ show_behind_parent = true
 position = Vector2(13, -9)
 texture = ExtResource("3")
 
+[node name="bite_hitbox" parent="Sprite2D" instance_placeholder="res://misc/dog_bite_hurtbox.tscn"]
+unique_name_in_owner = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
 shape = SubResource("1")

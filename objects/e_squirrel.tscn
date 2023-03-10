@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsyvngtw7pf6t"]
+[gd_scene load_steps=5 format=3 uid="uid://bsyvngtw7pf6t"]
 
 [ext_resource type="Texture2D" uid="uid://ck56vddd1m501" path="res://sprites/squirrel.png" id="1"]
 [ext_resource type="Script" path="res://objects/enemy.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(22, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2o8o"]
+size = Vector2(26, 11)
 
 [node name="e_squirrel" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
@@ -22,3 +25,14 @@ shape = SubResource("1")
 
 [node name="edge_raycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 4)
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_x2o8o")
+debug_color = Color(0, 1, 0, 0.419608)
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
