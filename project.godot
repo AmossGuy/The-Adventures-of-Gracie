@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="The Adventures of Gracie"
+run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
@@ -24,6 +25,7 @@ window/stretch/mode="viewport"
 
 [gui]
 
+theme/custom_font="res://font/Shinonome12.fnt"
 common/drop_mouse_on_gui_input_disabled=true
 
 [importer_defaults]

@@ -1,0 +1,5 @@
+swap 92 and 165
+8216: xoffset 9→2, xadvance 12→6
+8217: xadvance 12→6
+8220: xoffset 6→0, xadvance 12→6
+8221: xoffset 1→0, xadvance 12→6

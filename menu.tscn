@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgip584xnlk7"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_crh3p"]
+
+[node name="menu" type="Node2D"]
+script = ExtResource("1_crh3p")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="menu_container" type="VBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 24.0
+offset_bottom = -32.0
+grow_vertical = 2

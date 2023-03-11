@@ -1,0 +1,16 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://fejv4jvui7qj"
+path="res://.godot/imported/Shinonome12.fnt-6ad0e0951d022227cb96be2a82eedef9.fontdata"
+
+[deps]
+
+source_file="res://font/Shinonome12.fnt"
+dest_files=["res://.godot/imported/Shinonome12.fnt-6ad0e0951d022227cb96be2a82eedef9.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
