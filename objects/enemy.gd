@@ -9,6 +9,11 @@ const EDGE_COOLDOWN: float = 0.1
 var direction: float = -1
 var edge_cooldown: float = 0
 
+func _ready() -> void:
+	if scale.x < 0:
+		scale.x *= -1
+		direction *= -1
+
 func _physics_process(delta: float) -> void:
 	if patrol:
 		velocity.x = WALK_SPEED * direction

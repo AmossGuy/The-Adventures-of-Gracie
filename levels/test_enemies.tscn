@@ -69,6 +69,7 @@ patrol = true
 
 [node name="e_squirrel3" parent="." instance=ExtResource("4_e2d56")]
 position = Vector2(272, -32)
+scale = Vector2(-1, 1)
 patrol = true
 
 [node name="e_squirrel4" parent="." instance=ExtResource("4_e2d56")]
