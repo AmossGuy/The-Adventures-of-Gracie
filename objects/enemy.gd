@@ -6,7 +6,7 @@ const GRAVITY: float = 400.0
 const WALK_SPEED: float = 40.0
 const EDGE_COOLDOWN: float = 0.1
 
-var direction: float = 1
+var direction: float = -1
 var edge_cooldown: float = 0
 
 func _physics_process(delta: float) -> void:
