@@ -17,15 +17,17 @@ func start_new_menu(title: String) -> void:
 	spacer.custom_minimum_size.y = 8
 	menu_container.add_child(spacer)
 
-func add_button(label: String, action: Callable = func(): pass) -> void:
+func add_button(label: String, action: Callable = func(): pass) -> Button:
 	var button := Button.new()
 	button.text = label
 	button.pressed.connect(action)
 	menu_container.add_child(button)
+	return button
 
 func setup_main_menu() -> void:
 	start_new_menu("MAIN MENU")
 	add_button("Level Select", setup_level_select)
+	add_button("Settings", setup_settings_menu)
 	add_button("Quit", get_tree().quit)
 
 func setup_level_select() -> void:
@@ -36,3 +38,15 @@ func setup_level_select() -> void:
 
 func load_level(level: String) -> void:
 	get_tree().change_scene_to_file(level)
+
+func setup_settings_menu() -> void:
+	start_new_menu("SETTINGS")
+	add_button("Back", setup_main_menu)
+	var fs_b := add_button("", toggle_fullscreen)
+	fs_b.set_script(preload("res://misc/fullscreen_button_text.gd"))
+
+func toggle_fullscreen() -> void:
+	if get_tree().root.mode == Window.MODE_FULLSCREEN:
+		get_tree().root.mode = Window.MODE_WINDOWED
+	else:
+		get_tree().root.mode = Window.MODE_FULLSCREEN
