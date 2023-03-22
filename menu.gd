@@ -13,8 +13,11 @@ func start_new_menu(title: String) -> void:
 	header.text = title
 	menu_container.add_child(header)
 	
+	add_spacer()
+
+func add_spacer() -> void:
 	var spacer := Control.new()
-	spacer.custom_minimum_size.y = 8
+	spacer.custom_minimum_size.y = 4
 	menu_container.add_child(spacer)
 
 func add_button(label: String, action: Callable = func(): pass) -> Button:
@@ -42,6 +45,7 @@ func load_level(level: String) -> void:
 func setup_settings_menu() -> void:
 	start_new_menu("SETTINGS")
 	add_button("Back", setup_main_menu)
+	add_button("Control Settings", setup_control_menu)
 	var fs_b := add_button("", toggle_fullscreen)
 	fs_b.set_script(preload("res://misc/fullscreen_button_text.gd"))
 
@@ -50,3 +54,9 @@ func toggle_fullscreen() -> void:
 		get_tree().root.mode = Window.MODE_WINDOWED
 	else:
 		get_tree().root.mode = Window.MODE_FULLSCREEN
+
+func setup_control_menu() -> void:
+	start_new_menu("CONTROL SETTINGS")
+	add_button("Back", setup_settings_menu)
+	add_spacer()
+	menu_container.add_child(preload("res://misc/control_binder.tscn").instantiate())

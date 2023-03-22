@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3y1vmrbsxeuq"]
+
+[ext_resource type="Script" path="res://misc/control_binder_entry.gd" id="1_j71ed"]
+
+[node name="control_binder_entry" type="HBoxContainer"]
+script = ExtResource("1_j71ed")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+
+[node name="ResetButton" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "Reset"
+
+[connection signal="focus_exited" from="Button" to="." method="_on_button_focus_exited"]
+[connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]

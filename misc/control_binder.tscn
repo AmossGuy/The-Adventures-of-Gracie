@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://da68lg0ixp5t"]
+
+[ext_resource type="Script" path="res://misc/control_binder.gd" id="1_agl8l"]
+
+[node name="control_binder" type="VFlowContainer"]
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_agl8l")
