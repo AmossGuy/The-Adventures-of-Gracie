@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0gn2yie6gk5e"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_f0lj3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrtwr"]
+bg_color = Color(0, 0, 0, 0.5)
+
+[node name="pause_menu" type="CanvasLayer"]
+process_mode = 3
+layer = 11
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrtwr")
+
+[node name="menu_container" type="VBoxContainer" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = -32.0
+grow_vertical = 2
+script = ExtResource("1_f0lj3")
+pause_menu = true
