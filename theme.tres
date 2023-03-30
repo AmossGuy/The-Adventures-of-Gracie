@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cfid6egxnnpx6"]
-
-[ext_resource type="FontFile" uid="uid://fejv4jvui7qj" path="res://font/Shinonome12.fnt" id="1_fvy8y"]
-
-[resource]
-default_font = ExtResource("1_fvy8y")
-default_font_size = 12
