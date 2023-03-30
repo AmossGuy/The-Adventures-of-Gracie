@@ -25,7 +25,7 @@ window/stretch/mode="viewport"
 
 [gui]
 
-theme/custom_font="res://font/Shinonome12.fnt"
+theme/custom="res://theme.tres"
 common/drop_mouse_on_gui_input_disabled=true
 
 [importer_defaults]
