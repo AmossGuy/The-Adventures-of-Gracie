@@ -31,13 +31,13 @@ func _physics_process(delta: float) -> void:
 		var interval := FLASH_INTERVAL
 		if invulnerability_timer <= INVULNERABILITY_TIME / 5:
 			interval /= 2
-		$Sprite2D.visible = fmod(invulnerability_timer, interval * 2) >= interval
+		$sprite.visible = fmod(invulnerability_timer, interval * 2) >= interval
 		invulnerability_timer -= delta
 		invulnerability_timer = max(invulnerability_timer, 0)
 	elif not state in [State.HURT, State.OOFED]:
-		$Sprite2D.visible = true
+		$sprite.visible = true
 		if %hitbox.has_overlapping_areas():
-			velocity.x = -$Sprite2D.scale.x * KNOCKBACK_FORCE_H
+			velocity.x = -$sprite.scale.x * KNOCKBACK_FORCE_H
 			velocity.y = -KNOCKBACK_FORCE_V
 			$health.health -= 1
 			if $health.health <= 0:
@@ -73,10 +73,12 @@ func _physics_process(delta: float) -> void:
 			$attacks.f_ammo -= 1
 			var frisbee: Node2D = load("res://objects/frisbee.tscn").instantiate()
 			frisbee.global_position = frisbee_sprite.global_position + Vector2(0, 2)
-			frisbee.velocity = Vector2(THROW_POWER * $Sprite2D.scale.x, -THROW_POWER)
+			frisbee.velocity = Vector2(THROW_POWER * $sprite.scale.x, -THROW_POWER)
 			get_parent().add_child(frisbee)
 		elif $attacks.selection == 0:
 			%bite_hitbox.create_instance()
+			%AnimationPlayer.stop()
+			%AnimationPlayer.play("bite")
 		
 		frisbee_sprite.visible = $attacks.selection == 1 and $attacks.f_ammo > 0
 	
@@ -121,9 +123,9 @@ func _physics_process(delta: float) -> void:
 	
 	if state in [State.GROUND, State.JUMP, State.FALL]:
 		if velocity.x < 0:
-			$Sprite2D.scale.x = -1
+			$sprite.scale.x = -1
 		elif velocity.x > 0:
-			$Sprite2D.scale.x = 1
+			$sprite.scale.x = 1
 	
 	move_and_slide()
 	
