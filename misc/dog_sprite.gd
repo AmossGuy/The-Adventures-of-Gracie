@@ -6,3 +6,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			$AnimationPlayer.play("bite")
 		"bite":
 			$AnimationPlayer.play("stand")
+
+func spawn_bite_hitbox() -> void:
+	%bite_hitbox.create_instance()

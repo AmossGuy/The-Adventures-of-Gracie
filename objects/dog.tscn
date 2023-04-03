@@ -135,6 +135,20 @@ tracks/4/keys = {
 "update": 1,
 "values": [2, 3, 5]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_bite_hitbox"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_fpclu"]
 resource_name = "bite_windup"
@@ -312,7 +326,7 @@ texture = ExtResource("3")
 
 [node name="bite_hitbox" parent="sprite" instance_placeholder="res://misc/dog_bite_hurtbox.tscn"]
 unique_name_in_owner = true
-position = Vector2(0, 1)
+position = Vector2(17, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)

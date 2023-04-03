@@ -76,7 +76,6 @@ func _physics_process(delta: float) -> void:
 			frisbee.velocity = Vector2(THROW_POWER * $sprite.scale.x, -THROW_POWER)
 			get_parent().add_child(frisbee)
 		elif $attacks.selection == 0:
-			%bite_hitbox.create_instance()
 			%AnimationPlayer.stop()
 			%AnimationPlayer.play("bite")
 		
