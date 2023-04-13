@@ -30,9 +30,9 @@ func add_button(label: String, action: Callable = func(): pass) -> Button:
 func setup_main_menu() -> void:
 	start_new_menu("PAUSED" if pause_menu else "MAIN MENU")
 	if pause_menu:
-		add_button("Unpause", unpause)
+		add_button("Unpause", unpause).grab_focus()
 	if not pause_menu:
-		add_button("Level Select", setup_level_select)
+		add_button("Level Select", setup_level_select).grab_focus()
 	add_button("Settings", setup_settings_menu)
 	if not pause_menu:
 		add_button("Quit", get_tree().quit)
@@ -41,7 +41,7 @@ func setup_main_menu() -> void:
 
 func setup_level_select() -> void:
 	start_new_menu("LEVEL SELECT")
-	add_button("Back", setup_main_menu)
+	add_button("Back", setup_main_menu).grab_focus()
 	add_button("Basic Test", load_level.bind("res://levels/test.tscn"))
 	add_button("Enemy Test", load_level.bind("res://levels/test_enemies.tscn"))
 
@@ -51,7 +51,7 @@ func load_level(level: String) -> void:
 
 func setup_settings_menu() -> void:
 	start_new_menu("SETTINGS")
-	add_button("Back", setup_main_menu)
+	add_button("Back", setup_main_menu).grab_focus()
 	add_button("Control Settings", setup_control_menu)
 	var fs_b := add_button("", toggle_fullscreen)
 	fs_b.set_script(preload("res://misc/fullscreen_button_text.gd"))
@@ -64,7 +64,7 @@ func toggle_fullscreen() -> void:
 
 func setup_control_menu() -> void:
 	start_new_menu("CONTROL SETTINGS")
-	add_button("Back", setup_settings_menu)
+	add_button("Back", setup_settings_menu).grab_focus()
 	add_gap()
 	add_child(preload("res://misc/control_binder.tscn").instantiate())
 
