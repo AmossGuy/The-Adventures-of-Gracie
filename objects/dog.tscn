@@ -217,6 +217,7 @@ tracks/4/keys = {
 [sub_resource type="Animation" id="Animation_7hxwc"]
 resource_name = "stand"
 length = 0.001
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -295,7 +296,7 @@ size = Vector2(24, 14)
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(32, 22)
 
-[node name="dog" type="CharacterBody2D"]
+[node name="dog" type="CharacterBody2D" groups=["player"]]
 z_index = 2
 collision_layer = 0
 floor_constant_speed = true
