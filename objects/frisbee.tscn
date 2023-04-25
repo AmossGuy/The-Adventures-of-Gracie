@@ -27,7 +27,9 @@ shape = SubResource("1")
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+[node name="hurtbox_shape" type="CollisionShape2D" parent="hurtbox"]
+unique_name_in_owner = true
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_o2fbd")
+disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
