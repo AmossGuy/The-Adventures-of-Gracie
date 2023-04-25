@@ -3,6 +3,9 @@ extends Node2D
 @export var enemy: bool = false
 
 func _ready() -> void:
+	if enemy:
+		$Sprite2D.material.set_shader_parameter("palette", randi_range(0, 3))
+	
 	$AnimationPlayer.play("stand")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
