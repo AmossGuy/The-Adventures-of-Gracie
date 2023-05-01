@@ -24,4 +24,4 @@ func _physics_process(delta: float) -> void:
 	if collision != null and prev_velocity.length() >= BOUNCE_MIN:
 		velocity = prev_velocity.bounce(collision.get_normal()) * BOUNCE_MULTIPLIER
 	
-	%hurtbox_shape.disabled = not (velocity.length_squared() >= HARMFUL_SPEED ** 2)
+	%hurtbox_shape.set_deferred("disabled", not (velocity.length_squared() >= HARMFUL_SPEED ** 2))
