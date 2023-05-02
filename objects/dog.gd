@@ -26,6 +26,14 @@ var jump_buffer_timer: float = 0.0
 var jump_coyote_timer: float = 0.0
 var invulnerability_timer: float = 0.0
 
+func _ready() -> void:
+	var level_manager := get_tree().current_scene
+	var camera := $Camera2D
+	camera.limit_left = level_manager.camera_left
+	camera.limit_right = level_manager.camera_right
+	camera.limit_top = level_manager.camera_top
+	camera.limit_bottom = level_manager.camera_bottom
+
 func _physics_process(delta: float) -> void:
 	if invulnerability_timer > 0:
 		var interval := FLASH_INTERVAL
@@ -53,7 +61,7 @@ func _physics_process(delta: float) -> void:
 				state = State.HURT
 	
 	var grab_area: Area2D = get_node("%grab_area")
-	var frisbee_sprite: Node = get_node("%frisbee_sprite")
+	var frisbee_sprite: Node = $sprite/%frisbee_sprite
 	
 	for frisbee in get_tree().get_nodes_in_group("frisbee"):
 		if abs(frisbee.velocity.x) < 40 and grab_area.overlaps_body(frisbee):
@@ -76,8 +84,8 @@ func _physics_process(delta: float) -> void:
 			frisbee.velocity = Vector2(THROW_POWER * $sprite.scale.x, -THROW_POWER)
 			get_parent().add_child(frisbee)
 		elif $attacks.selection == 0:
-			%AnimationPlayer.stop()
-			%AnimationPlayer.play("bite")
+			$sprite/%AnimationPlayer.stop()
+			$sprite/%AnimationPlayer.play("bite")
 		
 		frisbee_sprite.visible = $attacks.selection == 1 and $attacks.f_ammo > 0
 	

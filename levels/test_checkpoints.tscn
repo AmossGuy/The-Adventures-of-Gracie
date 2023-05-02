@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://cii7o810u0665"]
+
+[ext_resource type="Script" path="res://level_manager.gd" id="1_okl1l"]
+[ext_resource type="TileSet" uid="uid://b28ltapshelnf" path="res://tilesets/placeholder.tres" id="2_uimbf"]
+[ext_resource type="PackedScene" uid="uid://db48rlylh3q2p" path="res://objects/player_spawn.tscn" id="3_xioqf"]
+[ext_resource type="PackedScene" uid="uid://bd8vhpj1hl0hq" path="res://objects/frisbee.tscn" id="4_031eq"]
+[ext_resource type="PackedScene" uid="uid://d7mggav0wkdy" path="res://objects/e_dog.tscn" id="5_3tcnw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ocpcn"]
+
+[node name="test_checkpoints" type="Node2D"]
+script = ExtResource("1_okl1l")
+camera_left = -64
+camera_right = 720
+camera_top = -160
+camera_bottom = 80
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_uimbf")
+format = 2
+layer_0/tile_data = PackedInt32Array(131068, 10, 0, 131069, 10, 0, 131070, 10, 0, 131071, 10, 0, 65536, 10, 0, 65537, 10, 0, 65538, 10, 0, 65539, 10, 0, 65540, 10, 0, 65541, 10, 0, 65542, 10, 0, 65543, 10, 0, 65544, 10, 0, 65545, 10, 0, 65546, 10, 0, 65550, 10, 0, 65551, 10, 0, 65552, 10, 0, 65553, 10, 0, 65554, 10, 0, 65555, 10, 0, 131066, 10, 0, 131067, 10, 0, 131082, 10, 0, 196618, 10, 0, 196619, 10, 0, 196620, 10, 0, 196621, 10, 0, 196622, 10, 0, 131086, 10, 0, 65556, 10, 0, 65557, 10, 0, 65558, 10, 0, 65559, 10, 0, 65560, 10, 0, 65561, 10, 0, 65562, 10, 0, 65563, 10, 0, 65564, 10, 0, 65565, 10, 0, 65566, 10, 0, 65567, 10, 0, 65568, 10, 0, 65569, 10, 0, 131105, 10, 0, 196641, 10, 0, 196642, 10, 0, 196643, 10, 0, 196644, 10, 0, 196645, 10, 0, 131109, 10, 0, 65573, 10, 0, 65574, 10, 0, 65575, 10, 0, 65576, 10, 0, 65577, 10, 0, 65578, 10, 0, 65579, 10, 0, 65580, 10, 0, 65581, 10, 0, 65582, 10, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+rotation = 1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(15.9996, 64.0001)
+shape = SubResource("WorldBoundaryShape2D_ocpcn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(16.0045, -720)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_ocpcn")
+
+[node name="player_spawn" parent="." instance=ExtResource("3_xioqf")]
+position = Vector2(-16, 16)
+start = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="frisbee" parent="Node2D" instance=ExtResource("4_031eq")]
+position = Vector2(48, 16)
+
+[node name="frisbee2" parent="Node2D" instance=ExtResource("4_031eq")]
+position = Vector2(64, 16)
+
+[node name="frisbee3" parent="Node2D" instance=ExtResource("4_031eq")]
+position = Vector2(80, 16)
+
+[node name="frisbee4" parent="Node2D" instance=ExtResource("4_031eq")]
+position = Vector2(96, 16)
+
+[node name="e_dog" parent="." instance=ExtResource("5_3tcnw")]
+position = Vector2(200, 48)
+
+[node name="player_spawn2" parent="." instance=ExtResource("3_xioqf")]
+position = Vector2(464, 16)
+
+[node name="e_dog2" parent="." instance=ExtResource("5_3tcnw")]
+position = Vector2(568, 48)
