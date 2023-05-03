@@ -58,6 +58,8 @@ func _physics_process(delta: float) -> void:
 					%AnimationPlayer.stop()
 					%AnimationPlayer.play("bite_windup")
 					attack_cooldown = ATTACK_COOLDOWN
+	else:
+		ai_state = AiState.IDLE
 	
 	if ai_state == AiState.CHASE and %AnimationPlayer.current_animation == "stand":
 		velocity.x = WALK_SPEED * (-1 if closest.position.x < position.x else 1)

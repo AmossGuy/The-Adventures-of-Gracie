@@ -142,3 +142,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y = -OOF_BOUNCE
 		collision_layer = 0
 		collision_mask = 0
+	
+	if state == State.OOFED:
+		if not $VisibleOnScreenNotifier2D.is_on_screen():
+			get_tree().create_timer(1.5, false).timeout.connect(get_tree().reload_current_scene)
+			queue_free()

@@ -10,7 +10,13 @@ var player_start: Node2D = null
 
 func _ready() -> void:
 	if is_instance_valid(player_start):
-		player_start.spawn_player()
+		var player: Node2D = player_start.spawn_player()
+		var hud := preload("res://hud.tscn").instantiate()
+		add_child(hud)
+		player.get_node("health").connect("health_changed", hud.update_health)
+		player.get_node("health").spaghetti()
+		player.get_node("attacks").connect("attackstatus_changed", hud.update_attackstatus)
+		player.get_node("attacks").spaghetti()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):

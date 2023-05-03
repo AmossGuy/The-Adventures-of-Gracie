@@ -11,7 +11,8 @@ func _ready() -> void:
 		if start:
 			get_tree().current_scene.player_start = self
 
-func spawn_player() -> void:
+func spawn_player() -> Node2D:
 	var player := preload("res://objects/dog.tscn").instantiate()
 	get_tree().current_scene.add_child(player)
 	player.global_transform = self.global_transform
+	return player
