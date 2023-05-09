@@ -1,12 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cii7o810u0665"]
+[gd_scene load_steps=9 format=3 uid="uid://cii7o810u0665"]
 
 [ext_resource type="Script" path="res://level_manager.gd" id="1_okl1l"]
 [ext_resource type="TileSet" uid="uid://b28ltapshelnf" path="res://tilesets/placeholder.tres" id="2_uimbf"]
 [ext_resource type="PackedScene" uid="uid://db48rlylh3q2p" path="res://objects/player_spawn.tscn" id="3_xioqf"]
 [ext_resource type="PackedScene" uid="uid://bd8vhpj1hl0hq" path="res://objects/frisbee.tscn" id="4_031eq"]
 [ext_resource type="PackedScene" uid="uid://d7mggav0wkdy" path="res://objects/e_dog.tscn" id="5_3tcnw"]
+[ext_resource type="PackedScene" uid="uid://ctmd48hogdw2w" path="res://objects/checkpoint.tscn" id="6_f6gfn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ocpcn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyc7t"]
+size = Vector2(64, 1024)
 
 [node name="test_checkpoints" type="Node2D"]
 script = ExtResource("1_okl1l")
@@ -52,6 +56,13 @@ position = Vector2(96, 16)
 
 [node name="e_dog" parent="." instance=ExtResource("5_3tcnw")]
 position = Vector2(200, 48)
+
+[node name="checkpoint" parent="." node_paths=PackedStringArray("spawn") instance=ExtResource("6_f6gfn")]
+position = Vector2(464, 0)
+spawn = NodePath("../player_spawn2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoint"]
+shape = SubResource("RectangleShape2D_gyc7t")
 
 [node name="player_spawn2" parent="." instance=ExtResource("3_xioqf")]
 position = Vector2(464, 16)

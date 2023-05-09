@@ -16,7 +16,7 @@ size = Vector2(32, 22)
 
 [node name="dog" type="CharacterBody2D" groups=["player"]]
 z_index = 2
-collision_layer = 0
+collision_layer = 2
 floor_constant_speed = true
 floor_snap_length = 4.0
 script = ExtResource("2")

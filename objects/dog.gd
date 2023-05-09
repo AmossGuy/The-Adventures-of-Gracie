@@ -35,6 +35,10 @@ func _ready() -> void:
 	camera.limit_bottom = level_manager.camera_bottom
 
 func _physics_process(delta: float) -> void:
+	var sudoku := false
+	if Input.is_action_just_pressed("debug_sudoku"):
+		sudoku = true
+	
 	if invulnerability_timer > 0:
 		var interval := FLASH_INTERVAL
 		if invulnerability_timer <= INVULNERABILITY_TIME / 5:
@@ -44,10 +48,12 @@ func _physics_process(delta: float) -> void:
 		invulnerability_timer = max(invulnerability_timer, 0)
 	elif not state in [State.HURT, State.OOFED]:
 		$sprite.visible = true
-		if %hitbox.has_overlapping_areas():
+		if %hitbox.has_overlapping_areas() or sudoku:
 			velocity.x = -$sprite.scale.x * KNOCKBACK_FORCE_H
 			velocity.y = -KNOCKBACK_FORCE_V
 			$health.health -= 1
+			if sudoku:
+				$health.health = 0
 			if $health.health <= 0:
 				velocity.y *= 1.5
 				state = State.OOFED
@@ -145,5 +151,7 @@ func _physics_process(delta: float) -> void:
 	
 	if state == State.OOFED:
 		if not $VisibleOnScreenNotifier2D.is_on_screen():
-			get_tree().create_timer(1.5, false).timeout.connect(get_tree().reload_current_scene)
+			get_tree().create_timer(1.5, false).timeout.connect(
+				get_tree().current_scene.restart_from_checkpoint
+			)
 			queue_free()

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctmd48hogdw2w"]
+
+[ext_resource type="Script" path="res://objects/checkpoint.gd" id="1_rujm0"]
+
+[node name="checkpoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_rujm0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

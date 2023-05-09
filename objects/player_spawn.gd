@@ -9,7 +9,9 @@ func _ready() -> void:
 	
 	if not Engine.is_editor_hint():
 		if start:
-			get_tree().current_scene.player_start = self
+			var thingy := get_tree().current_scene
+			if str(thingy.player_start) == "":
+				thingy.player_start = thingy.get_path_to(self)
 
 func spawn_player() -> Node2D:
 	var player := preload("res://objects/dog.tscn").instantiate()
