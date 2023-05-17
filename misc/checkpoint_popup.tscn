@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8pftq3sly1o1"]
+
+[ext_resource type="Script" path="res://misc/checkpoint_popup.gd" id="1_gut4s"]
+
+[sub_resource type="Animation" id="Animation_ldst3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(157, 248)]
+}
+
+[sub_resource type="Animation" id="Animation_8m4a5"]
+resource_name = "slide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(157, 248), Vector2(157, 216)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i02q5"]
+_data = {
+"RESET": SubResource("Animation_ldst3"),
+"slide": SubResource("Animation_8m4a5")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahles"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.980392, 0.219608, 0.0431373, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pkmbl"]
+line_spacing = 0.0
+
+[node name="checkpoint_popup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gut4s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "slide"
+libraries = {
+"": SubResource("AnimationLibrary_i02q5")
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 24.0001
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ahles")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+text = "Checkpoint reached"
+label_settings = SubResource("LabelSettings_pkmbl")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

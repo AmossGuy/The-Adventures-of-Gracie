@@ -36,3 +36,7 @@ func restart_from_checkpoint() -> void:
 	var AAAAAA := func():
 		tree.current_scene.player_start = s
 	AAAAAA.call_deferred()
+
+func display_checkpoint_popup() -> void:
+	var popup := preload("res://misc/checkpoint_popup.tscn").instantiate()
+	$hud.add_child(popup)
