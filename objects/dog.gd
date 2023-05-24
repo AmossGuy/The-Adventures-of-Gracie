@@ -141,6 +141,11 @@ func _physics_process(delta: float) -> void:
 			$sprite.scale.x = 1
 	
 	move_and_slide()
+
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		if collision.get_collider().is_in_group("trampoline"):
+			velocity.y = -300
 	
 	if state == State.HURT and is_on_floor():
 		state = State.GROUND
