@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://hmh3tvonu7iv"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_sr0yi"]
+a = Vector2(-8, 0)
+b = Vector2(8, 0)
+
+[node name="trampoline" type="Node2D"]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." groups=["trampoline"]]
+
+[node name="ColorRect" type="ColorRect" parent="AnimatableBody2D"]
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1, 1, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("SegmentShape2D_sr0yi")
+one_way_collision = true
