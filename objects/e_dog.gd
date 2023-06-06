@@ -10,6 +10,8 @@ const DETECTION_RADIUS: float = 16 * 6
 const TRY_ATTACK_RADIUS: float = 16 * 2
 const ATTACK_COOLDOWN: float = 1
 
+const BORE_RADIUS: float = 16 * 8
+
 enum AiState {
 	IDLE,
 	CHASE,
@@ -19,6 +21,8 @@ var ai_state: int = AiState.IDLE
 var health: float = 3
 var invulnerability_timer: float = 0
 var attack_cooldown: float = ATTACK_COOLDOWN
+
+@onready var home: Vector2 = global_position
 
 func _physics_process(delta: float) -> void:
 	if invulnerability_timer > 0:
@@ -51,7 +55,9 @@ func _physics_process(delta: float) -> void:
 			if distance <= DETECTION_RADIUS:
 				ai_state = AiState.CHASE
 		elif ai_state == AiState.CHASE:
-			if attack_cooldown > 0:
+			if distance > BORE_RADIUS:
+				ai_state = AiState.IDLE
+			elif attack_cooldown > 0:
 				attack_cooldown -= delta
 			else:
 				if distance <= TRY_ATTACK_RADIUS:
@@ -62,7 +68,9 @@ func _physics_process(delta: float) -> void:
 		ai_state = AiState.IDLE
 	
 	if ai_state == AiState.CHASE and %AnimationPlayer.current_animation == "stand":
-		velocity.x = WALK_SPEED * (-1 if closest.position.x < position.x else 1)
+		velocity.x = WALK_SPEED * (-1 if closest.global_position.x < global_position.x else 1)
+	elif ai_state == AiState.IDLE and %AnimationPlayer.current_animation == "stand":
+		velocity.x = WALK_SPEED * (-1 if home.x < global_position.x else 1) if abs(home.x - global_position.x) > 8 else 0.0
 	else:
 		velocity.x = 0
 	
@@ -73,5 +81,8 @@ func _physics_process(delta: float) -> void:
 			$sprite.scale.x = -1
 		elif velocity.x > 0:
 			$sprite.scale.x = 1
+	
+	if not %edge_raycast.is_colliding():
+		velocity.x = 0
 	
 	move_and_slide()
