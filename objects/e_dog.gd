@@ -81,6 +81,9 @@ func _physics_process(delta: float) -> void:
 			$sprite.scale.x = -1
 		elif velocity.x > 0:
 			$sprite.scale.x = 1
+		else:
+			if is_instance_valid(closest):
+				$sprite.scale.x = (-1 if closest.global_position.x < global_position.x else 1)
 	
 	if not %edge_raycast.is_colliding():
 		velocity.x = 0

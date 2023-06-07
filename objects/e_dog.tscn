@@ -328,7 +328,8 @@ collision_layer = 8
 [node name="edge_raycast" type="RayCast2D" parent="sprite"]
 unique_name_in_owner = true
 position = Vector2(8, 0)
-target_position = Vector2(0, 4)
+target_position = Vector2(0, 8)
+hit_from_inside = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
