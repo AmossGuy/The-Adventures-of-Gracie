@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=3 uid="uid://c5j83w0f6q7i5"]
+
+[ext_resource type="Script" path="res://level_manager.gd" id="1_q2np8"]
+[ext_resource type="TileSet" uid="uid://b28ltapshelnf" path="res://tilesets/placeholder.tres" id="2_m2055"]
+[ext_resource type="PackedScene" uid="uid://db48rlylh3q2p" path="res://objects/player_spawn.tscn" id="3_1ojev"]
+[ext_resource type="PackedScene" uid="uid://d7mggav0wkdy" path="res://objects/e_dog.tscn" id="4_moqr8"]
+[ext_resource type="PackedScene" uid="uid://hmh3tvonu7iv" path="res://objects/trampoline.tscn" id="5_ggl2q"]
+[ext_resource type="PackedScene" uid="uid://ctmd48hogdw2w" path="res://objects/checkpoint.tscn" id="6_copkc"]
+[ext_resource type="PackedScene" uid="uid://bd8vhpj1hl0hq" path="res://objects/frisbee.tscn" id="7_vjbu4"]
+[ext_resource type="PackedScene" uid="uid://cm7324o54nheo" path="res://objects/goal.tscn" id="8_5hej3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jg0ca"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq0o7"]
+size = Vector2(32, 400)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_awj8k"]
+normal = Vector2(0, 1)
+
+[node name="scribble_1" type="Node2D"]
+script = ExtResource("1_q2np8")
+camera_left = 0
+camera_right = 2432
+camera_bottom = 240
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_m2055")
+format = 2
+layer_0/tile_data = PackedInt32Array(786432, 10, 0, 786433, 10, 0, 786434, 10, 0, 786435, 10, 0, 786436, 10, 0, 786437, 10, 0, 786438, 10, 0, 786439, 10, 0, 786440, 10, 0, 786441, 10, 0, 786442, 10, 0, 786443, 10, 0, 786444, 10, 0, 786445, 10, 0, 786446, 10, 0, 786447, 10, 0, 786448, 10, 0, 786449, 10, 0, 786450, 10, 0, 786451, 10, 0, 786452, 10, 0, 786453, 10, 0, 786454, 10, 0, 786455, 10, 0, 786456, 10, 0, 786457, 10, 0, 786458, 10, 0, 786459, 10, 0, 786460, 10, 0, 786461, 10, 0, 786462, 10, 0, 786463, 10, 0, 786464, 10, 0, 786465, 10, 0, 851967, 10, 0, 851966, 10, 0, 786466, 10, 0, 786467, 10, 0, 786468, 10, 0, 786469, 10, 0, 786470, 10, 0, 786471, 10, 0, 720935, 10, 0, 720936, 10, 0, 720937, 10, 0, 720938, 10, 0, 720939, 10, 0, 720940, 10, 0, 720941, 10, 0, 720942, 10, 0, 720943, 10, 0, 720944, 10, 0, 720945, 10, 0, 720946, 10, 0, 655410, 10, 0, 589874, 10, 0, 524338, 10, 0, 458802, 10, 0, 393266, 10, 0, 327730, 10, 0, 262194, 10, 0, 262195, 10, 0, 262196, 10, 0, 262199, 196618, 65537, 327735, 10, 131073, 262200, 131082, 65537, 327736, 65546, 131073, 262201, 65546, 65537, 327737, 131082, 131073, 262202, 10, 65537, 327738, 196618, 131073, 327739, 196618, 65537, 393275, 10, 131073, 327740, 131082, 65537, 393276, 65546, 131073, 327741, 65546, 65537, 393277, 131082, 131073, 327742, 10, 65537, 393278, 196618, 131073, 262198, 10, 0, 262197, 10, 0, 131127, 10, 0, 65591, 10, 0, 55, 10, 0, -65481, 10, 0, -131017, 10, 0, -196553, 10, 0, 131128, 10, 0, 131129, 10, 0, 131130, 10, 0, 131131, 10, 0, 131132, 10, 0, 131133, 10, 0, 131134, 10, 0, 131135, 10, 0, 131136, 10, 0, 131137, 10, 0, 131138, 10, 0, 131139, 10, 0, 131140, 10, 0, 131141, 10, 0, 393279, 10, 0, 393280, 10, 0, 393281, 10, 0, 393282, 10, 0, 393283, 10, 0, 393284, 10, 0, 327748, 10, 0, 262212, 10, 0, 262213, 10, 0, 131142, 10, 0, 131143, 10, 0, 131144, 10, 0, 131145, 10, 0, 262214, 10, 0, 131146, 10, 0, 196682, 10, 0, 262218, 10, 0, 327754, 10, 0, 393290, 10, 0, 262215, 10, 0, 327751, 10, 0, 393287, 10, 0, 393286, 10, 0, 393285, 10, 0, 458826, 10, 0, 524362, 10, 0, 524361, 10, 0, 524360, 10, 0, 524359, 10, 0, 524358, 10, 0, 524357, 10, 0, 458818, 10, 0, 524354, 10, 0, 589890, 10, 0, 655426, 10, 0, 589893, 10, 0, 655429, 10, 0, 720965, 10, 0, 720962, 10, 0, 786498, 10, 0, 852034, 10, 0, 917570, 10, 0, 917571, 10, 0, 917572, 10, 0, 917573, 10, 0, 917574, 10, 0, 917575, 10, 0, 720966, 10, 0, 720967, 10, 0, 720968, 10, 0, 720969, 10, 0, 720970, 10, 0, 655434, 10, 0, 589898, 10, 0, 65610, 10, 0, 74, 10, 0, -65462, 10, 0, -130998, 10, 0, -196534, 10, 0, -196535, 10, 0, -196536, 10, 0, -196537, 10, 0, -196538, 10, 0, -196539, 10, 0, -196540, 10, 0, -196541, 10, 0, -196542, 10, 0, -196543, 10, 0, -196544, 10, 0, -196545, 10, 0, -196546, 10, 0, -196547, 10, 0, -196548, 10, 0, -196549, 10, 0, -196550, 10, 0, -196551, 10, 0, -196552, 10, 0, 917576, 10, 0, 917577, 10, 0, 917578, 10, 0, 917579, 10, 0, 917580, 10, 0, 917581, 10, 0, 917582, 10, 0, 917583, 10, 0, 917584, 10, 0, 917585, 10, 0, 917586, 10, 0, 917587, 10, 0, 917590, 10, 0, 917588, 10, 0, 917589, 10, 0, 917591, 10, 0, 852056, 10, 1, 852057, 65546, 1, 852058, 131082, 1, 852059, 196618, 1, 786524, 10, 1, 786525, 65546, 1, 786526, 131082, 1, 786527, 196618, 1, 917592, 196618, 196609, 852060, 196618, 196609, 917593, 131082, 196609, 852061, 131082, 196609, 917594, 65546, 196609, 852062, 65546, 196609, 917595, 10, 196609, 852063, 10, 196609, 786528, 10, 0, 786529, 10, 0, 786530, 10, 0, 786531, 10, 0, 786532, 10, 0, 786533, 10, 0, 786534, 10, 0, 786535, 10, 0, 786536, 10, 0, 721000, 10, 0, 655464, 10, 0, 589928, 10, 0, 524392, 10, 0, 458856, 10, 0, 393320, 10, 0, 589925, 10, 2, 589924, 10, 2, 589923, 10, 2, 589922, 10, 2, 393311, 10, 2, 393312, 10, 2, 393313, 10, 2, 393314, 10, 2, 196708, 10, 2, 196709, 10, 2, 196710, 10, 2, 196711, 10, 2, 327784, 10, 0, 262248, 10, 0, 196712, 10, 0, 196713, 10, 0, 196714, 10, 0, 196715, 10, 0, 262251, 10, 0, 196719, 10, 0, 262255, 10, 0, 196720, 10, 0, 196721, 10, 0, 196722, 10, 0, 196723, 10, 0, 196724, 10, 0, 196725, 10, 0, -458628, 10, 0, -393092, 10, 0, -327556, 10, 0, -262020, 10, 0, -196484, 10, 0, -130948, 10, 0, -65412, 10, 0, 124, 10, 0, 65660, 10, 0, 131196, 10, 0, 196732, 10, 0, 196731, 10, 0, 196730, 10, 0, 196729, 10, 0, 196728, 10, 0, 196727, 10, 0, 196726, 10, 0, -458627, 10, 0, -458626, 10, 0, -458625, 10, 0, -458624, 10, 0, -458623, 10, 0, -458622, 10, 0, -458621, 10, 0, -458620, 10, 0, -458619, 10, 0, -458618, 10, 0, -524154, 10, 0, -589690, 10, 0, -655226, 10, 0, -655225, 10, 0, -655224, 10, 0, -655223, 10, 0, -720759, 10, 0, -786295, 10, 0, -851831, 10, 0, -851838, 10, 0, -851837, 10, 0, -851836, 10, 0, -851839, 10, 0, -917375, 10, 0, -982911, 10, 0, -1048447, 10, 0, -1048442, 10, 0, -1048441, 10, 0, -1048440, 10, 0, -1048439, 10, 0, -917367, 10, 0, -982903, 10, 0, -1113983, 10, 0, -1179519, 10, 0, -1245055, 10, 0, -1245054, 10, 0, -1245053, 10, 0, -1245052, 10, 0, -1113975, 10, 0, -1179511, 10, 0, -1245047, 10, 0, -1310583, 10, 0, -1376119, 10, 0, -1441655, 10, 0, -1441656, 10, 0, -1441657, 10, 0, -1441658, 10, 0, -1310591, 10, 0, -1376127, 10, 0, -1441663, 10, 0, -1507199, 10, 0, -1572735, 10, 0, -1638271, 10, 0, -1703807, 10, 0, -1769343, 10, 0, -1441654, 10, 0, -1441653, 10, 0, -1441652, 10, 0, -1441651, 10, 0, -1441650, 10, 0, -1441649, 10, 0, -1441648, 10, 0, -1441647, 10, 0, -1441646, 10, 0, -1441645, 10, 0, -1441644, 10, 0, -1441643, 10, 0, -1441642, 10, 0, -1441641, 10, 0, -1441640, 10, 0, -1441639, 10, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+rotation = 1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(192, 0.00120544)
+shape = SubResource("WorldBoundaryShape2D_jg0ca")
+
+[node name="player_spawn" parent="." instance=ExtResource("3_1ojev")]
+position = Vector2(48, 192)
+start = true
+
+[node name="e_dog" parent="." instance=ExtResource("4_moqr8")]
+position = Vector2(480, 192)
+
+[node name="trampoline" parent="." instance=ExtResource("5_ggl2q")]
+position = Vector2(768, 144)
+scale = Vector2(4, 1)
+
+[node name="e_dog2" parent="." instance=ExtResource("4_moqr8")]
+position = Vector2(1024, 96)
+
+[node name="checkpoint" parent="." node_paths=PackedStringArray("spawn") instance=ExtResource("6_copkc")]
+position = Vector2(1296, 224)
+spawn = NodePath("../player_spawn2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoint"]
+position = Vector2(0, -168)
+shape = SubResource("RectangleShape2D_kq0o7")
+
+[node name="player_spawn2" parent="." instance=ExtResource("3_1ojev")]
+position = Vector2(1296, 224)
+
+[node name="e_dog3" parent="." instance=ExtResource("4_moqr8")]
+position = Vector2(1600, 144)
+
+[node name="e_dog4" parent="." instance=ExtResource("4_moqr8")]
+position = Vector2(1552, 96)
+
+[node name="e_dog5" parent="." instance=ExtResource("4_moqr8")]
+position = Vector2(1632, 48)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1616, 192)
+
+[node name="frisbee" parent="Node2D" instance=ExtResource("7_vjbu4")]
+
+[node name="frisbee2" parent="Node2D" instance=ExtResource("7_vjbu4")]
+position = Vector2(8, 0)
+
+[node name="frisbee3" parent="Node2D" instance=ExtResource("7_vjbu4")]
+position = Vector2(16, 0)
+
+[node name="frisbee4" parent="Node2D" instance=ExtResource("7_vjbu4")]
+position = Vector2(24, 0)
+
+[node name="frisbee5" parent="Node2D" instance=ExtResource("7_vjbu4")]
+position = Vector2(32, 0)
+
+[node name="frisbee6" parent="Node2D" instance=ExtResource("7_vjbu4")]
+position = Vector2(40, 0)
+
+[node name="trampoline2" parent="." instance=ExtResource("5_ggl2q")]
+position = Vector2(1752, 64)
+scale = Vector2(3, 1)
+
+[node name="trampoline3" parent="." instance=ExtResource("5_ggl2q")]
+position = Vector2(1728, -32)
+scale = Vector2(3, 1)
+
+[node name="trampoline4" parent="." instance=ExtResource("5_ggl2q")]
+position = Vector2(1848, -112)
+scale = Vector2(3, 1)
+
+[node name="e_dog6" parent="." instance=ExtResource("4_moqr8")]
+position = Vector2(2176, -160)
+
+[node name="e_dog7" parent="." instance=ExtResource("4_moqr8")]
+position = Vector2(2096, -208)
+
+[node name="e_dog8" parent="." instance=ExtResource("4_moqr8")]
+position = Vector2(2176, -256)
+
+[node name="e_dog9" parent="." instance=ExtResource("4_moqr8")]
+position = Vector2(2096, -304)
+
+[node name="goal" parent="." instance=ExtResource("8_5hej3")]
+position = Vector2(2344, -352)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(2432, -400)
+rotation = 1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("WorldBoundaryShape2D_awj8k")
+metadata/_edit_lock_ = true

@@ -45,6 +45,7 @@ func setup_level_select() -> void:
 	add_button("Basic Test", load_level.bind("res://levels/test.tscn"))
 	add_button("Enemy Test", load_level.bind("res://levels/test_enemies.tscn"))
 	add_button("Checkpoint Test", load_level.bind("res://levels/test_checkpoints.tscn"))
+	add_button("Scribble 1", load_level.bind("res://levels/scribble_1.tscn"))
 
 func load_level(level: String) -> void:
 	get_tree().paused = false
