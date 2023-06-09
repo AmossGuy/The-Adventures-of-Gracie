@@ -19,6 +19,7 @@ enum State {
 	FALL,
 	HURT,
 	OOFED,
+	VICTORY,
 }
 
 var state: int = State.GROUND
@@ -131,6 +132,8 @@ func _physics_process(delta: float) -> void:
 	if state in [State.GROUND, State.JUMP, State.FALL]:
 		var hor_input := -float(Input.is_action_pressed("left")) + float(Input.is_action_pressed("right"))
 		velocity.x = hor_input * WALK_SPEED
+	elif state == State.VICTORY:
+		velocity.x = 0
 	
 	velocity += delta * Vector2.DOWN * GRAVITY
 	
