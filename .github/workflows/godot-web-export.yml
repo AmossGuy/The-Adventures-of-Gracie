@@ -33,6 +33,10 @@ jobs:
         run: mkdir -v -p build/web
       - name: Build
         run: godot -v --headless --export-release "Web" build/web/index.html
+      - name: Stupid workaround
+        run: |
+          curl -fsSL https://github.com/gzuidhof/coi-serviceworker/raw/master/coi-serviceworker.js > build/web/coi-serviceworker.js
+          sed -i 's#\(		<script src="index.js"></script>\)#		<script src="coi-serviceworker.js"></script>\n\1#g' build/web/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
