@@ -1,0 +1,41 @@
+name: deploy Godot game to Gh Pages
+
+env:
+  GODOT_VERSION: 4.0.3
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.0.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Move HTML5 templates into position
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Create staging directory
+        run: mkdir -v -p build/web
+      - name: Build
+        run: godot -v --export "HTML5" build/web/index.html
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./build/web
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
