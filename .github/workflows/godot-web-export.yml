@@ -23,7 +23,7 @@ jobs:
       - name: Create staging directory
         run: mkdir -v -p build/web
       - name: Build
-        run: godot -v --export-release "HTML5" build/web/index.html
+        run: godot -v --headless --export-release "HTML5" build/web/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
