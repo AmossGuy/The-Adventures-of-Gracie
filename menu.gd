@@ -35,7 +35,8 @@ func setup_main_menu() -> void:
 		add_button("Level Select", setup_level_select).grab_focus()
 	add_button("Settings", setup_settings_menu)
 	if not pause_menu:
-		add_button("Quit", get_tree().quit)
+		if not OS.has_feature("web"):
+			add_button("Quit", get_tree().quit)
 	else:
 		add_button("Return to Menu", load_level.bind("res://menu.tscn"))
 
