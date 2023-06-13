@@ -43,9 +43,6 @@ func setup_main_menu() -> void:
 func setup_level_select() -> void:
 	start_new_menu("LEVEL SELECT")
 	add_button("Back", setup_main_menu).grab_focus()
-	add_button("Basic Test", load_level.bind("res://levels/test.tscn"))
-	add_button("Enemy Test", load_level.bind("res://levels/test_enemies.tscn"))
-	add_button("Checkpoint Test", load_level.bind("res://levels/test_checkpoints.tscn"))
 	add_button("Scribble 1", load_level.bind("res://levels/scribble_1.tscn"))
 
 func load_level(level: String) -> void:
